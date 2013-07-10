@@ -1,0 +1,26 @@
+{
+  "name": "installify",
+  "version": "0.0.0",
+  "description": "A browserify transform that automatically installs missing depenedencies",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/installify.git"
+  },
+  "author": "Hugh Kennedy <hughskennedy@gmail.com> (http://hughskennedy.com/)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "keywords": [
+    "install",
+    "automatically",
+    "browserify",
+    "transform",
+    "depdendencies"
+  ],
+  "dependencies": {
+    "map-async": "~0.1.1",
+    "through": "~2.3.4",
+    "browser-resolve": "~1.1.0",
+    "detective": "~2.1.2"
+  }
+}
