@@ -23,6 +23,8 @@ function installify(filename) {
     })
 
     map(deps, function(pkg, next) {
+      pkg = pkg.replace(/\/.*$/g, '')
+
       resolve(pkg, {
         filename: filename
       }, function(err, path) {
