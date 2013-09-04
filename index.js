@@ -60,9 +60,10 @@ function installify(filename) {
     proc.stderr.on('data', function(data) {
       deptext += data
     })
+
     proc.once('exit', function() {
       if (deptext) {
-        stream.queue('console.log("new dependencies installed:\n" +')
+        stream.queue('console.log("new dependencies installed:\\n" +')
         stream.queue(JSON.stringify(deptext))
         stream.queue(');\n')
       }
