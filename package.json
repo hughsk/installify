@@ -20,7 +20,7 @@
   "dependencies": {
     "map-async": "~0.1.1",
     "through": "~2.3.4",
-    "browser-resolve": "~1.1.0",
+    "browser-resolve": "1.1.0",
     "detective": "~2.1.2"
   }
 }
