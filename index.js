@@ -41,6 +41,7 @@ function installify(filename) {
   }
 
   function install(dir, deps) {
+    var deptext = ''
     var args = ['install'].concat(deps)
     var cmd = process.platform === 'win32'
         ? 'npm.cmd'
@@ -56,8 +57,15 @@ function installify(filename) {
       , env: process.env
     })
 
-    proc.stderr.pipe(process.stderr)
+    proc.stderr.on('data', function(data) {
+      deptext += data
+    })
     proc.once('exit', function() {
+      if (deptext) {
+        stream.queue('console.log("new dependencies installed:\n" +')
+        stream.queue(JSON.stringify(deptext))
+        stream.queue(');\n')
+      }
       stream.queue(buffer)
       stream.queue(null)
     })
