@@ -15,9 +15,9 @@ function installify(filename, opt) {
   var buffer = ''
 
   var userArgs = []
-  if (opt.save)
+  if (opt.save || opt.S)
     userArgs = ['--save']
-  else if (opt.saveDev)
+  else if (opt.saveDev || opt.D)
     userArgs = ['--save-dev']
   var installArgs = ['install'].concat(userArgs)
 
