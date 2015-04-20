@@ -9,9 +9,17 @@ module.exports = installify
 
 function truthy(a) { return a }
 
-function installify(filename) {
+function installify(filename, opt) {
+  opt = opt||{}
   var stream = through(write, resolver)
   var buffer = ''
+
+  var userArgs = []
+  if (opt.save || opt.S)
+    userArgs = ['--save']
+  else if (opt.saveDev || opt.D)
+    userArgs = ['--save-dev']
+  var installArgs = ['install'].concat(userArgs)
 
   function write(data) {
     buffer += data
@@ -42,7 +50,7 @@ function installify(filename) {
 
   function install(dir, deps) {
     var deptext = ''
-    var args = ['install'].concat(deps)
+    var args = installArgs.concat(deps)
     var cmd = process.platform === 'win32'
         ? 'npm.cmd'
         : 'npm'
