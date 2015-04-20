@@ -27,4 +27,17 @@ touch index.js
 beefy index.js -- -t installify
 ```
 
+## Options ##
+
+```
+  --save, -S       save installs as a dependency
+  --save-dev, -D   save installs as a devDependency
+```
+
+You can use the subarg syntax for CLI options, like this:
+
+``` bash
+beefy index.js -- -t [ installify --save ]
+```
+
 Enjoy!
