@@ -26,7 +26,15 @@ function installify(filename, opt) {
   }
 
   function resolver() {
-    var deps = detective(buffer).filter(function(pkg) {
+    var requires
+    try {
+      requires = detective(buffer)
+    } catch (e) {
+      stream.emit('error', e)
+      return
+    }
+
+    var deps = requires.filter(function(pkg) {
       return pkg[0] !== '.' && pkg[0] !== '/'
     })
 
@@ -65,7 +73,7 @@ function installify(filename, opt) {
       , env: process.env
     })
 
-    proc.stderr.on('data', function(data) {
+    proc.stdout.on('data', function(data) {
       deptext += data
     })
 
