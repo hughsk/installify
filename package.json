@@ -1,7 +1,7 @@
 {
   "name": "installify",
   "version": "1.0.1",
-  "description": "A browserify transform that automatically installs missing depenedencies",
+  "description": "A browserify transform that automatically installs missing dependencies",
   "main": "index.js",
   "repository": {
     "type": "git",
