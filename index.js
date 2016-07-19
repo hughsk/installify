@@ -10,6 +10,7 @@ module.exports = installify
 function truthy(a) { return a }
 
 function installify(filename, opt) {
+  if (/\.json$/i.test(filename)) return through()
   opt = opt||{}
   var stream = through(write, resolver)
   var buffer = ''
