@@ -16,11 +16,20 @@ function installify(filename, opt) {
   var buffer = ''
 
   var userArgs = []
-  if (opt.save || opt.S)
-    userArgs = ['--save']
-  else if (opt.saveDev || opt.D)
-    userArgs = ['--save-dev']
-  var installArgs = ['install'].concat(userArgs)
+  if (opt.yarn) {
+    if (opt.saveDev || opt.D) userArgs.push('--dev')
+    if (opt.saveOptional || opt.O) userArgs.push('--optional')
+    if (opt.saveExact || opt.E) userArgs.push('--exact')
+    if (opt.peer) userArgs.push('--peer')
+    if (opt.tilde) userArgs.push('--tilde')
+  } else {
+    if (opt.saveDev || opt.D) userArgs.push('--save-dev')
+    if (opt.saveOptional || opt.O) userArgs.push('--save-optional')
+    if (opt.saveExact || opt.E) userArgs.push('--save-exact')
+    if (opt.save || opt.S) userArgs.push('--save')
+    if (opt.saveDev || opt.D) userArgs.push('--save-dev')
+  }
+  var installArgs = [(opt.yarn ? 'add' : 'install')].concat(userArgs)
 
   function write(data) {
     buffer += data
@@ -60,9 +69,10 @@ function installify(filename, opt) {
   function install(dir, deps) {
     var deptext = ''
     var args = installArgs.concat(deps)
+    var client = opt.yarn ? 'yarn' : 'npm'
     var cmd = process.platform === 'win32'
-        ? 'npm.cmd'
-        : 'npm'
+        ? (client + '.cmd')
+        : client
 
     if (!deps.length) {
       stream.queue(buffer)
